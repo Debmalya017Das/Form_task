@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Country, State, City } from 'country-state-city';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import './form.css';
 
 const Form = () => {
@@ -70,6 +72,13 @@ const Form = () => {
       setCities(citiesData);
       console.log('Cities Data:', citiesData);
     }
+  };
+
+  const handlePhoneChange = (value) => {
+    setFormData({
+      ...formData,
+      phoneNo: value,
+    });
   };
 
   const handleSubmit = (e) => {
@@ -175,12 +184,12 @@ const Form = () => {
 
         <div className="field">
           <label className="label">Phone No.</label>
-          <input
-            type="text"
+          <PhoneInput
             name="phoneNo"
             value={formData.phoneNo}
-            onChange={handleChange}
+            onChange={handlePhoneChange}
             className="input"
+            defaultCountry="US"
           />
           {errors.phoneNo && <p className="error">{errors.phoneNo}</p>}
         </div>
